@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -24,8 +25,9 @@ export class Size {
   quantity: number;
 
   @ManyToOne(() => ColorSize, (colsiz) => colsiz.sizes)
+  @JoinColumn({ name: 'color_size_id' })
   colorSize: ColorSize;
 
   @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.size)
-  orderDetails: OrderDetail;
+  orderDetails: OrderDetail[];
 }

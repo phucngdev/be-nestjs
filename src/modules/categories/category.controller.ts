@@ -13,13 +13,12 @@ import { Category } from 'src/entities/category.entity';
 import { ManagerGuard } from 'src/share/guards/manager.guard';
 import { JwtAuthGuard } from 'src/share/guards/auth.guard';
 import { CreateCategoryDto } from 'src/dto/category/createCategory.dto';
+import { RoleGuard } from 'src/share/guards/role.guard';
 
 @Controller('/category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(ManagerGuard)
   @Get()
   @HttpCode(200)
   async getAllCategoryController(): Promise<Category[]> {
@@ -32,6 +31,8 @@ export class CategoryController {
     return await this.categoryService.getCategoryByIdService(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
   @Post()
   @HttpCode(201)
   async createCategoryController(

@@ -19,7 +19,7 @@ import { JwtAuthGuard } from 'src/share/guards/auth.guard';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get()
   @HttpCode(200)
   async getAllOrdersController(): Promise<Order[]> {

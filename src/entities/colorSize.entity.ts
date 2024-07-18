@@ -16,7 +16,7 @@ export class ColorSize {
   color_size_id: string;
 
   @OneToOne(() => Color, (color) => color.colorSize)
-  @JoinColumn()
+  @JoinColumn({name: 'color_id'})
   colors: Color;
 
   @OneToMany(() => Size, (size) => size.colorSize)

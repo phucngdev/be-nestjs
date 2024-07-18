@@ -28,5 +28,5 @@ export class Color {
   colorSize: ColorSize;
 
   @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.color)
-  orderDetails: OrderDetail;
+  orderDetails: OrderDetail[];
 }

@@ -25,6 +25,6 @@ export class Transaction {
   transaction_date: Date;
 
   @OneToOne(() => Order, (order) => order.transaction, { onDelete: 'CASCADE' })
-  @JoinColumn()
+  @JoinColumn({ name: 'order_id' })
   order: Order;
 }

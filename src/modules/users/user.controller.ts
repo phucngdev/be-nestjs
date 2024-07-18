@@ -18,12 +18,13 @@ import { DeleteResult } from 'typeorm';
 import { UserDto } from 'src/dto/user/user.dto';
 import { JwtAuthGuard } from 'src/share/guards/auth.guard';
 import { RoleGuard } from 'src/share/guards/role.guard';
+import { ManagerGuard } from 'src/share/guards/manager.guard';
 
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
   @Get('/')
   @HttpCode(200)
   async getAllUsersController(): Promise<User[]> {
@@ -91,7 +92,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @UseGuards(RoleGuard)
+  @UseGuards(ManagerGuard)
   @Delete('/:id')
   @HttpCode(200)
   async deleteUserController(@Param('id') id: string): Promise<boolean> {

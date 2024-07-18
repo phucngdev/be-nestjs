@@ -32,6 +32,10 @@ export class OrderRepository {
     return orders;
   }
 
+  // async findProductsByOrder(orderId: string): Promise<OrderDetail[]> {
+  //   const orders =  await this.findAll()
+  // }
+
   async findById(userId: string, orderId: string): Promise<Order> {
     // const user = await this.userRepos.findById(userId);
     // if (!user) {
@@ -59,8 +63,8 @@ export class OrderRepository {
         const orderDetail = new OrderDetail();
         orderDetail.product = orde.product;
         orderDetail.order = orderSave;
-        orderDetail.quantity = orde.quantity;
         const product = await this.productRepos.findById(orde.product);
+        orderDetail.quantity = orde.quantity;
         if (product) {
           totalAmount += product.price * orde.quantity;
         }

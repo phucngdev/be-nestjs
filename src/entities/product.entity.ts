@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -68,6 +69,7 @@ export class Product {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
+  @JoinColumn({ name: 'category_id' })
   category: Category;
 
   @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)

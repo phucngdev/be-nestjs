@@ -5,7 +5,7 @@ import { OrderService } from './order.service';
 import { OrderController } from './order.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../users/user.module';
-import { ProductModule } from "../products/product.module";
+import { ProductModule } from '../products/product.module';
 
 @Module({
   imports: [
@@ -14,9 +14,10 @@ import { ProductModule } from "../products/product.module";
       secret: process.env.ACCESS_SECRET_KEY,
     }),
     UserModule,
-    ProductModule
+    ProductModule,
   ],
   providers: [OrderRepository, OrderService],
   controllers: [OrderController],
+  exports: [OrderRepository],
 })
 export class OrderModule {}

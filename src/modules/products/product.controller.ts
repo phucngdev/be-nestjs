@@ -6,10 +6,13 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from 'src/entities/product.entity';
 import { ProductDto } from 'src/dto/product/product.dto';
+import { JwtAuthGuard } from 'src/share/guards/auth.guard';
+import { RoleGuard } from 'src/share/guards/role.guard';
 
 @Controller('/product')
 export class ProductController {
@@ -26,10 +29,12 @@ export class ProductController {
 
   @Get('/:id')
   @HttpCode(200)
-  async GetOneController(@Param() id: any): Promise<Product> {
-    return await this.productService.getOneService(id.id);
+  async getOneController(@Param('id') id: string): Promise<Product> {
+    return await this.productService.getOneService(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
   @Post('/create')
   @HttpCode(201)
   async addProductController(@Body() productDto: ProductDto) {

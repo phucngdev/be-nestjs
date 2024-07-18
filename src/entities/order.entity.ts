@@ -52,6 +52,7 @@ export class Order {
   order_details: OrderDetail[];
 
   @ManyToOne(() => User, (user) => user.orders, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @OneToOne(() => Transaction, (trans) => trans.order)

@@ -8,6 +8,7 @@ import { ProductModule } from './modules/products/product.module';
 import { CategoryModule } from './modules/categories/category.module';
 import { OrderModule } from './modules/orders/order.module';
 import { PaymentModule } from './modules/payments/payment.module';
+import { DashboardModule } from './modules/statistic/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -18,13 +19,8 @@ import { PaymentModule } from './modules/payments/payment.module';
     CategoryModule,
     OrderModule,
     PaymentModule,
-    BullModule.forRoot({
-      redis: {
-        host: 'localhost',
-        port: 6379,
-      },
-    }),
-    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
-  ],
+    DashboardModule,
+    ConfigModule.forRoot({ envFilePath: '.env.development', isGlobal: true }),
+  ]
 })
 export class AppModule {}
